@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        background-image: url(../img/pexels-pixabay-147411.jpg);
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0% 10%;
+    }
+
+    .main,
+    .task-table {
+        width: 100%;
+        height: auto;
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0);
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .main h1 {
+        text-align: center;
+        margin-bottom: 15px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: lightcyan;
+    }
+
+    .main button,
+    .task-table table .del {
+        background-color: cadetblue;
+        color: green;
+        font-size: 20px;
+        padding: 8px 20px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    }
+
+    .task-table table .del {
+        width: 100%;
+        height: 100%;
+        color: red;
+    }
+
+    input,
+    textarea,
+    table {
+        width: 100%;
+        font-size: 25px;
+        padding: 5px;
+        outline: none;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        letter-spacing: .5px;
+    }
+
+    table td {
+        padding: 5px;
+    }
+
+    input {
+        line-height: 50px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        height: 120px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <h1>ToDo Application</h1>
+
+            <input type="text" name="" id="title">
+            <textarea name="" id="desc"></textarea>
+            <button class="add" onclick="add()"><i class="fa-solid fa-plus"> Add</i></button>
+
+        </div>
+        <div class="task-table">
+            <table id="table" border="2px"></table>
+        </div>
+    </div>
+
+    <script>
+        data = [
+            {
+                title : "Task 1",
+                desc : "Learn Python through w3school."
+            }
+        ]
+        function display() {
+            html = ""
+            for (i = 0; i < data.length; i++) {
+                html = html + `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${data[i].title}</td>
+                <td>${data[i].desc}</td>
+                <td><button class="del" onclick="del(${i})"><i class="fa-solid fa-trash"> Delete</i></button></td>
+            </tr>
+            `
+            }
+
+            document.getElementById('table').innerHTML = html;
+        }
+
+        display()
+
+        function add() {
+            t_title = document.getElementById('title').value;
+            t_desc = document.getElementById('desc').value;
+
+            data.push(
+                {
+                    title: t_title,
+                    desc: t_desc
+                }
+            )
+
+            display()
+        }
+
+        function del(x) {
+            data.splice(x, 1)
+
+            display()
+        }
+    </script>
+
+    <script src="https://kit.fontawesome.com/5768d7013a.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
